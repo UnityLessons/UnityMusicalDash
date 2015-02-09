@@ -5,6 +5,11 @@ using System.Collections;
 [AddComponentMenu("Modular Character Controls/Character Floater 2D Module")]
 public class CharacterFloater2DModule : CharacterController2DModule
 {
+    public float fallingRatio = 0.0f;
+    public float floatTime = 3.0f;
+    private float floatTimer = 0.0f;
+    private float gravityScale = 1.0f;
+
     public bool isGrounded
     {
         get
@@ -13,12 +18,40 @@ public class CharacterFloater2DModule : CharacterController2DModule
         }
     }
 
-    private bool isFloatUsed = false;
+    public bool isFloatUsed = false;
     public bool canIFloat
     {
         get
         {
-            return !isFloatUsed && !isGrounded;
+            return !isFloatUsed && !isGrounded && amIFalling && !isDoubleJumpUsed;
+        }
+    }
+
+    private DoubleJumpControl2DModule _doubleJump;
+    private DoubleJumpControl2DModule doubleJump
+    {
+        get
+        {
+            if (_doubleJump == null)
+            {
+                _doubleJump = GetComponent<DoubleJumpControl2DModule>();
+            }
+            return _doubleJump;
+        }
+    }
+
+    private bool isDoubleJumpUsed
+    {
+        get
+        {
+            if (doubleJump == null)
+            {
+                return false;
+            }
+            else
+            {
+                return doubleJump.isDoubleJumpUsed;
+            }
         }
     }
 
@@ -30,14 +63,26 @@ public class CharacterFloater2DModule : CharacterController2DModule
         }
     }
 
+    public bool amIFalling
+    {
+        get
+        {
+            return rigidbody2D.velocity.y < 0.0f;
+        }
+    }
+
+    public bool amIFloating = false;
+
     public override void Init()
     {
         Debug.Log("CharacterFloater2DModule Initialized!!");
+        gravityScale = rigidbody2D.gravityScale;
     }
 
     public override void Control()
     {
-
+        FloatResetControl();
+        FloatControl();
     }
 
     private void FloatControl()
@@ -46,15 +91,40 @@ public class CharacterFloater2DModule : CharacterController2DModule
         {
             Float();
         }
+
+        if (amIFloating)
+        {
+            FloatLimitControl();
+        }
     }
 
     private void Float()
     {
+        Vector2 currentVelocity = rigidbody2D.velocity;
+        currentVelocity.y *= fallingRatio;
 
+        rigidbody2D.gravityScale = 0.0f;
+        rigidbody2D.velocity = currentVelocity;
+        amIFloating = true;
+    }
+
+    private void FloatLimitControl()
+    {
+        floatTimer += Time.deltaTime;
+        if (floatTimer >= floatTime || !doIWantToFloat)
+        {
+            isFloatUsed = true;
+            amIFloating = false;
+            rigidbody2D.gravityScale = gravityScale;
+        }
     }
 
     private void FloatResetControl()
     {
-
+        if (isGrounded)
+        {
+            isFloatUsed = false;
+            floatTimer = 0.0f;
+        }
     }
 }

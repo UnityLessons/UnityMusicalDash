@@ -23,6 +23,50 @@ public class DoubleJumpControl2DModule : CharacterController2DModule
         }
     }
 
+    private CharacterFloater2DModule _floater;
+    private CharacterFloater2DModule floater
+    {
+        get
+        {
+            if (_floater == null)
+            {
+                _floater = GetComponent<CharacterFloater2DModule>();
+            }
+            return _floater;
+        }
+    }
+
+    private bool didIFloat
+    {
+        get
+        {
+            if (floater == null)
+            {
+                return false;
+            }
+            else
+            {
+                return floater.amIFloating || floater.isFloatUsed;
+            }
+        }
+    }
+
+    private bool doIWantToJump
+    {
+        get
+        {
+            return Input.GetButtonDown("Jump");
+        }
+    }
+
+    private bool canIDoubleJump
+    {
+        get
+        {
+            return !isGrounded && !isDoubleJumpUsed;
+        }
+    }
+
     public bool isDoubleJumpUsed = false;
     // Use this for initialization
     void Start()
@@ -58,7 +102,7 @@ public class DoubleJumpControl2DModule : CharacterController2DModule
 
     private void DoubleJumpControl()
     {
-        if (CanIDoubleJump() && DoIWantToJump())
+        if (canIDoubleJump && doIWantToJump && !didIFloat)
         {
             UseDoubleJump();
         }
@@ -68,15 +112,5 @@ public class DoubleJumpControl2DModule : CharacterController2DModule
     {
         jumpModule.Jump();
         isDoubleJumpUsed = true;
-    }
-
-    private static bool DoIWantToJump()
-    {
-        return Input.GetButtonDown("Jump");
-    }
-
-    private bool CanIDoubleJump()
-    {
-        return !isGrounded && !isDoubleJumpUsed;
     }
 }

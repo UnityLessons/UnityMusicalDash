@@ -7,8 +7,34 @@ public class CharacterFloater2DModule : CharacterController2DModule
 {
     public float fallingRatio = 0.0f;
     public float floatTime = 3.0f;
-    private float floatTimer = 0.0f;
-    private float gravityScale = 1.0f;
+    private float  _floatTimer = 0.0f;
+    private float _gravityScale = 1.0f;
+
+    public float FloatTimer 
+    { 
+        get
+        {
+            return _floatTimer;
+        }
+        
+        set
+        {
+            _floatTimer = value;
+        }
+    }
+
+    private float GravityScale
+    {
+        get
+        {
+            return _gravityScale;
+        }
+
+        set
+        {
+            _gravityScale = value;
+        }
+    }
 
     public bool isGrounded
     {
@@ -19,7 +45,7 @@ public class CharacterFloater2DModule : CharacterController2DModule
     }
 
     public bool isFloatUsed = false;
-    public bool canIFloat
+    public bool CanIFloat
     {
         get
         {
@@ -76,7 +102,7 @@ public class CharacterFloater2DModule : CharacterController2DModule
     public override void Init()
     {
         Debug.Log("CharacterFloater2DModule Initialized!!");
-        gravityScale = rigidbody2D.gravityScale;
+        GravityScale = rigidbody2D.gravityScale;
     }
 
     public override void Control()
@@ -87,7 +113,7 @@ public class CharacterFloater2DModule : CharacterController2DModule
 
     private void FloatControl()
     {
-        if (canIFloat && doIWantToFloat)
+        if (CanIFloat && doIWantToFloat)
         {
             Float();
         }
@@ -110,12 +136,12 @@ public class CharacterFloater2DModule : CharacterController2DModule
 
     private void FloatLimitControl()
     {
-        floatTimer += Time.deltaTime;
-        if (floatTimer >= floatTime || !doIWantToFloat)
+        FloatTimer += Time.deltaTime;
+        if (FloatTimer >= floatTime || !doIWantToFloat)
         {
             isFloatUsed = true;
             amIFloating = false;
-            rigidbody2D.gravityScale = gravityScale;
+            rigidbody2D.gravityScale = GravityScale;
         }
     }
 
@@ -124,7 +150,7 @@ public class CharacterFloater2DModule : CharacterController2DModule
         if (isGrounded)
         {
             isFloatUsed = false;
-            floatTimer = 0.0f;
+            FloatTimer = 0.0f;
         }
     }
 }

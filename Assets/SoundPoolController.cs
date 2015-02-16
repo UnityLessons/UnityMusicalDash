@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SoundPoolController : MonoBehaviour
 {
-    const int numberOfNotes = 49;
+    const int NUMBER_OF_NOTES = 49;
 
     #region Note Constants
     const int DO1 = 0, DO2 = 12, DO3 = 24, DO4 = 36, DO5 = 48,
@@ -21,7 +21,7 @@ public class SoundPoolController : MonoBehaviour
     #endregion
 
     private bool isNotesSetUp = false;
-    GameObject[] vNotesArray;
+    GameObject[] notesArray;
     private static SoundPoolController sPrivateInstance;
     public static SoundPoolController sInstance
     {
@@ -45,57 +45,57 @@ public class SoundPoolController : MonoBehaviour
     private void fSetupNotes()
     {
         isNotesSetUp = true;
-        vNotesArray = new GameObject[numberOfNotes];
+        notesArray = new GameObject[NUMBER_OF_NOTES];
 
-        vNotesArray[0] = transform.FindChild("DO1").gameObject;
-        vNotesArray[1] = transform.FindChild("DOS1").gameObject;
-        vNotesArray[2] = transform.FindChild("RE1").gameObject;
-        vNotesArray[3] = transform.FindChild("RES1").gameObject;
-        vNotesArray[4] = transform.FindChild("MI1").gameObject;
-        vNotesArray[5] = transform.FindChild("FA1").gameObject;
-        vNotesArray[6] = transform.FindChild("FAS1").gameObject;
-        vNotesArray[7] = transform.FindChild("SO1").gameObject;
-        vNotesArray[8] = transform.FindChild("SOS1").gameObject;
-        vNotesArray[9] = transform.FindChild("LA1").gameObject;
-        vNotesArray[10] = transform.FindChild("LAS1").gameObject;
-        vNotesArray[11] = transform.FindChild("SI1").gameObject;
-        vNotesArray[12] = transform.FindChild("DO2").gameObject;
-        vNotesArray[13] = transform.FindChild("DOS2").gameObject;
-        vNotesArray[14] = transform.FindChild("RE2").gameObject;
-        vNotesArray[15] = transform.FindChild("RES2").gameObject;
-        vNotesArray[16] = transform.FindChild("MI2").gameObject;
-        vNotesArray[17] = transform.FindChild("FA2").gameObject;
-        vNotesArray[18] = transform.FindChild("FAS2").gameObject;
-        vNotesArray[19] = transform.FindChild("SO2").gameObject;
-        vNotesArray[20] = transform.FindChild("SOS2").gameObject;
-        vNotesArray[21] = transform.FindChild("LA2").gameObject;
-        vNotesArray[22] = transform.FindChild("LAS2").gameObject;
-        vNotesArray[23] = transform.FindChild("SI2").gameObject;
-        vNotesArray[24] = transform.FindChild("DO3").gameObject;
-        vNotesArray[25] = transform.FindChild("DOS3").gameObject;
-        vNotesArray[26] = transform.FindChild("RE3").gameObject;
-        vNotesArray[27] = transform.FindChild("RES3").gameObject;
-        vNotesArray[28] = transform.FindChild("MI3").gameObject;
-        vNotesArray[29] = transform.FindChild("FA3").gameObject;
-        vNotesArray[30] = transform.FindChild("FAS3").gameObject;
-        vNotesArray[31] = transform.FindChild("SO3").gameObject;
-        vNotesArray[32] = transform.FindChild("SOS3").gameObject;
-        vNotesArray[33] = transform.FindChild("LA3").gameObject;
-        vNotesArray[34] = transform.FindChild("LAS3").gameObject;
-        vNotesArray[35] = transform.FindChild("SI3").gameObject;
-        vNotesArray[36] = transform.FindChild("DO4").gameObject;
-        vNotesArray[37] = transform.FindChild("DOS4").gameObject;
-        vNotesArray[38] = transform.FindChild("RE4").gameObject;
-        vNotesArray[39] = transform.FindChild("RES4").gameObject;
-        vNotesArray[40] = transform.FindChild("MI4").gameObject;
-        vNotesArray[41] = transform.FindChild("FA4").gameObject;
-        vNotesArray[42] = transform.FindChild("FAS4").gameObject;
-        vNotesArray[43] = transform.FindChild("SO4").gameObject;
-        vNotesArray[44] = transform.FindChild("SOS4").gameObject;
-        vNotesArray[45] = transform.FindChild("LA4").gameObject;
-        vNotesArray[46] = transform.FindChild("LAS4").gameObject;
-        vNotesArray[47] = transform.FindChild("SI4").gameObject;
-        vNotesArray[48] = transform.FindChild("DO5").gameObject;
+        notesArray[0] = transform.FindChild("DO1").gameObject;
+        notesArray[1] = transform.FindChild("DOS1").gameObject;
+        notesArray[2] = transform.FindChild("RE1").gameObject;
+        notesArray[3] = transform.FindChild("RES1").gameObject;
+        notesArray[4] = transform.FindChild("MI1").gameObject;
+        notesArray[5] = transform.FindChild("FA1").gameObject;
+        notesArray[6] = transform.FindChild("FAS1").gameObject;
+        notesArray[7] = transform.FindChild("SO1").gameObject;
+        notesArray[8] = transform.FindChild("SOS1").gameObject;
+        notesArray[9] = transform.FindChild("LA1").gameObject;
+        notesArray[10] = transform.FindChild("LAS1").gameObject;
+        notesArray[11] = transform.FindChild("SI1").gameObject;
+        notesArray[12] = transform.FindChild("DO2").gameObject;
+        notesArray[13] = transform.FindChild("DOS2").gameObject;
+        notesArray[14] = transform.FindChild("RE2").gameObject;
+        notesArray[15] = transform.FindChild("RES2").gameObject;
+        notesArray[16] = transform.FindChild("MI2").gameObject;
+        notesArray[17] = transform.FindChild("FA2").gameObject;
+        notesArray[18] = transform.FindChild("FAS2").gameObject;
+        notesArray[19] = transform.FindChild("SO2").gameObject;
+        notesArray[20] = transform.FindChild("SOS2").gameObject;
+        notesArray[21] = transform.FindChild("LA2").gameObject;
+        notesArray[22] = transform.FindChild("LAS2").gameObject;
+        notesArray[23] = transform.FindChild("SI2").gameObject;
+        notesArray[24] = transform.FindChild("DO3").gameObject;
+        notesArray[25] = transform.FindChild("DOS3").gameObject;
+        notesArray[26] = transform.FindChild("RE3").gameObject;
+        notesArray[27] = transform.FindChild("RES3").gameObject;
+        notesArray[28] = transform.FindChild("MI3").gameObject;
+        notesArray[29] = transform.FindChild("FA3").gameObject;
+        notesArray[30] = transform.FindChild("FAS3").gameObject;
+        notesArray[31] = transform.FindChild("SO3").gameObject;
+        notesArray[32] = transform.FindChild("SOS3").gameObject;
+        notesArray[33] = transform.FindChild("LA3").gameObject;
+        notesArray[34] = transform.FindChild("LAS3").gameObject;
+        notesArray[35] = transform.FindChild("SI3").gameObject;
+        notesArray[36] = transform.FindChild("DO4").gameObject;
+        notesArray[37] = transform.FindChild("DOS4").gameObject;
+        notesArray[38] = transform.FindChild("RE4").gameObject;
+        notesArray[39] = transform.FindChild("RES4").gameObject;
+        notesArray[40] = transform.FindChild("MI4").gameObject;
+        notesArray[41] = transform.FindChild("FA4").gameObject;
+        notesArray[42] = transform.FindChild("FAS4").gameObject;
+        notesArray[43] = transform.FindChild("SO4").gameObject;
+        notesArray[44] = transform.FindChild("SOS4").gameObject;
+        notesArray[45] = transform.FindChild("LA4").gameObject;
+        notesArray[46] = transform.FindChild("LAS4").gameObject;
+        notesArray[47] = transform.FindChild("SI4").gameObject;
+        notesArray[48] = transform.FindChild("DO5").gameObject;
     }
 
     void Awake()
@@ -112,6 +112,31 @@ public class SoundPoolController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayNote(DO1);
+        }
+    }
+
+    public void PlayNote(int pNote)
+    {
+        PlayNote(pNote, 1.0f);
+    }
+
+    public void PlayNote(int pNote, float pVolume)
+    {
+        AudioSource lAudio = notesArray[pNote % NUMBER_OF_NOTES].audio;
+        lAudio.volume = pVolume;
+        lAudio.Play();
+    }
+
+    public class SongData
+    {
+        
+    }
+
+    public class NoteData
     {
 
     }
